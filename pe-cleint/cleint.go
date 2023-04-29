@@ -1,0 +1,79 @@
+package peclient
+
+import (
+	"compress/gzip"
+	"fmt"
+	"go-puzzle-english-vocabulary-parser/common/logging"
+	"go-puzzle-english-vocabulary-parser/config"
+	"io"
+	"log"
+	"net/http"
+	"net/url"
+	"strings"
+	"time"
+)
+
+type PeClient struct {
+	cookie string
+	config *config.Config
+	logger *logging.Logger
+}
+
+func NewPeClient(cookie string, config *config.Config, logger *logging.Logger) *PeClient {
+	return &PeClient{cookie: cookie, config: config, logger: logger}
+}
+
+func (pe *PeClient) getBody(page int) string {
+	body := url.Values{}
+	//body.Add("for_dictionary_change", "true")
+	//body.Add("ajax_action", "ajax_pe_get_next_page_dictionary")
+	body.Add("page", fmt.Sprint(page))
+
+	return body.Encode()
+}
+
+func getClient() *http.Client {
+	client := &http.Client{
+		Timeout: time.Second * 15,
+	}
+
+	return client
+}
+
+func (pe *PeClient) MakeRequest(page int) (string, error) {
+	req, err := http.NewRequest(
+		"POST",
+		fmt.Sprintf("%s/change-my-dictionary", pe.config.Pe.BaseAPIPath),
+		strings.NewReader(pe.getBody(page)),
+	)
+	if err != nil {
+		return "", err
+	}
+	req.Header.Set("Accept", "*/*")
+	req.Header.Set("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
+	req.Header.Set("Cookie", "language_selected=ru; user_language=ru; last_login=lutogin.v8@gmail.com; guest_id_int=16671328882118131; sort_dictionary=eyJ2aWV3IjoiY2FyZHMiLCJpdGVtIjoid29yZCIsInNvcnQiOjF9; PHPSESSID=eea51c90d1268415760b1dfdbd541a43; wp_logged_in_cookie=Lutogin.v8@gmail.com|1684526830|lf96o46lelOS07wKQTR8vdC3Wb3WXiQibOjg0b6KyKp|d1eb01730479d281a2b1a77260a2380822b131f88eecb714f3516500ee83a553")
+
+	client := getClient()
+
+	resp, err := client.Do(req)
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+
+	var reader io.Reader = resp.Body
+	if resp.Header.Get("Content-Encoding") == "gzip" {
+		reader, err = gzip.NewReader(resp.Body)
+		if err != nil {
+			log.Panic("Error creating gzip reader:", err)
+		}
+		defer reader.(*gzip.Reader).Close()
+	}
+
+	bodyBytes, err := io.ReadAll(reader)
+	if err != nil {
+		panic(err)
+	}
+
+	return string(bodyBytes), nil
+}
