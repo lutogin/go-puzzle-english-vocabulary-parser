@@ -30,7 +30,9 @@ GOOS=linux GOARCH=amd64 go build -o builds/linux/
 ## Usage
 
 Most likely, operation system will block the app due can't check a application publisher.
-You should give access for that. 
+You should give access for that.
+
+Don't forget command `chmod +x ./go-puzzle-english-vocabulary-parser` for mac-os, I'm not sure about linux
 
 ![image](./manual/img/allow.png)
 
