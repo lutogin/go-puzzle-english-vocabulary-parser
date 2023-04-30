@@ -59,14 +59,14 @@ func init() { //@notice if init with small "i" this is function will be run auto
 	err := os.MkdirAll("logs", 0777)
 	common.CriticalErrorHandler(err)
 
-	file, err := os.OpenFile("logs/logs.txt", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0640)
-	common.CriticalErrorHandler(err)
-
-	defer file.Close()
+	//file, err := os.OpenFile("logs/logs.txt", os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0640)
+	//common.CriticalErrorHandler(err)
+	//
+	//defer file.Close()
 
 	l.SetOutput(io.Discard)
 	l.AddHook(&writerHook{
-		Writer:    []io.Writer{file, os.Stdout},
+		Writer:    []io.Writer{os.Stdout},
 		LogLevels: logrus.AllLevels,
 	})
 	l.SetLevel(logrus.TraceLevel)

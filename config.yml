@@ -8,3 +8,4 @@ pe:
   baseApiPath: "https://puzzle-english.com"
   selectorWords: ".puzzle-card__word .word-wrapper"
   selectorTranslations: ".puzzle-card__word .dict__video__list-table__word__translate.puzzle-text_fz_14.puzzle_mt_4"
+  wordsPerPage: 100

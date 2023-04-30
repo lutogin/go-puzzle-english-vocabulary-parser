@@ -2,6 +2,7 @@ package peclient
 
 import (
 	"compress/gzip"
+	"encoding/json"
 	"fmt"
 	"go-puzzle-english-vocabulary-parser/common/logging"
 	"go-puzzle-english-vocabulary-parser/config"
@@ -25,8 +26,8 @@ func NewPeClient(cookie string, config *config.Config, logger *logging.Logger) *
 
 func (pe *PeClient) getBody(page int) string {
 	body := url.Values{}
-	//body.Add("for_dictionary_change", "true")
-	//body.Add("ajax_action", "ajax_pe_get_next_page_dictionary")
+	body.Add("for_dictionary_change", "true")
+	body.Add("ajax_action", "ajax_pe_get_next_page_dictionary")
 	body.Add("page", fmt.Sprint(page))
 
 	return body.Encode()
@@ -70,10 +71,14 @@ func (pe *PeClient) MakeRequest(page int) (string, error) {
 		defer reader.(*gzip.Reader).Close()
 	}
 
-	bodyBytes, err := io.ReadAll(reader)
-	if err != nil {
-		panic(err)
+	var responseBody struct {
+		ListWords string `json:"listWords"`
 	}
 
-	return string(bodyBytes), nil
+	err = json.NewDecoder(reader).Decode(&responseBody)
+	if err != nil {
+		return "", err
+	}
+
+	return responseBody.ListWords, nil
 }

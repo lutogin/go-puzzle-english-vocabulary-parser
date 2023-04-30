@@ -17,6 +17,7 @@ type Config struct {
 		BaseAPIPath          string `yaml:"baseApiPath" env:"BASE_API_PATH" env-default:"https://puzzle-english.com"`
 		SelectorWords        string `yaml:"selectorWords" env:"SELECTOR_WORDS" env-default:".puzzle-card__word .word-wrapper"`
 		SelectorTranslations string `yaml:"selectorTranslations" env:"SELECTOR_TRANSLATIONS" env-default:".puzzle-card__word .dict__video__list-table__word__translate.puzzle-text_fz_14.puzzle_mt_4"`
+		WordsPerPage         int    `yaml:"wordsPerPage" env:"WORDS_PER_PAGE" env-default:"100"`
 	}
 }
 
