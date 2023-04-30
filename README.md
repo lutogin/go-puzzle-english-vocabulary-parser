@@ -3,11 +3,11 @@
 Puzzle-english vocabulary parser is application writes on Golang for export vocabulary from Puzzle-english site.
 
 ## Download
-[MacOS](https://github.com/lutogin/go-puzzle-english-vocabulary-parser/builds/mac-os/go-puzzle-english-vocabulary-parser)
+[MacOS](https://github.com/lutogin/go-puzzle-english-vocabulary-parser/raw/master/builds/mac-os/go-puzzle-english-vocabulary-parser)
 
-[Windows](https://github.com/lutogin/go-puzzle-english-vocabulary-parser/builds/windows/go-puzzle-english-vocabulary-parser.exe)
+[Windows](https://github.com/lutogin/go-puzzle-english-vocabulary-parser/raw/master/builds/windows/go-puzzle-english-vocabulary-parser.exe)
 
-[Linux](https://github.com/lutogin/go-puzzle-english-vocabulary-parser/builds/linux/go-puzzle-english-vocabulary-parser)
+[Linux](https://github.com/lutogin/go-puzzle-english-vocabulary-parser/raw/master/builds/linux/go-puzzle-english-vocabulary-parser)
 
 ## Build
 For manually building just download the repo and run build command.
