@@ -32,6 +32,8 @@ GOOS=linux GOARCH=amd64 go build -o builds/linux/
 Most likely, operation system will block the app due can't check a application publisher.
 You should give access for that. 
 
+![image](./manual/img/allow.png)
+
 Unfortunately, for using you should to pass your cookie from https://puzzle-english.com
 
 For it follow the next steps:
