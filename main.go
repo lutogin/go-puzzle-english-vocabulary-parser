@@ -7,7 +7,7 @@ import (
 
 func main() {
 	logger := logging.GetLogger()
-	cfg := config.GetConfig()
+	cfg := config.GetConfig(logger)
 
 	Start(cfg, logger)
 }

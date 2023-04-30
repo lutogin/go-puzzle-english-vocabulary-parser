@@ -24,12 +24,15 @@ GOOS=windows GOARCH=amd64 go build -o builds/windows/
 
 Linux
 ```bash
-GOOS=windows GOARCH=amd64 go build -o builds/windows/
+GOOS=linux GOARCH=amd64 go build -o builds/linux/
 ```
 
 ## Usage
 
-Unfortunately, for usage you should to pass you cookie from https://puzzle-english.com
+Most likely, operation system will block the app due can't check a application publisher.
+You should give access for that. 
+
+Unfortunately, for using you should to pass your cookie from https://puzzle-english.com
 
 For it follow the next steps:
 * Login to you account at https://puzzle-english.com
