@@ -37,10 +37,12 @@ For it follow the next steps:
 * Open developer tools (https://support.google.com/campaignmanager/answer/2828688?hl=en)
 * Go to tab "Network"
 * Click on "Clear" button.
+
 ![image](./manual/img/clear-network-logs.png)
 * Click on the button on webpage `Показать еще/Show more`
 * There will appear new log in Network section
 * Choose this item > Click to `Header` > Find and open `Request headers` > Find section `cookie` > Right click on it > `Copy value`
+
 ![image](./manual/img/get-cookie.png)
 * That's it. You can run app.
 
