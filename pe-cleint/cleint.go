@@ -51,7 +51,7 @@ func (pe *PeClient) MakeRequest(page int) (string, error) {
 	}
 	req.Header.Set("Accept", "*/*")
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8")
-	req.Header.Set("Cookie", "language_selected=ru; user_language=ru; last_login=lutogin.v8@gmail.com; guest_id_int=16671328882118131; sort_dictionary=eyJ2aWV3IjoiY2FyZHMiLCJpdGVtIjoid29yZCIsInNvcnQiOjF9; PHPSESSID=eea51c90d1268415760b1dfdbd541a43; wp_logged_in_cookie=Lutogin.v8@gmail.com|1684526830|lf96o46lelOS07wKQTR8vdC3Wb3WXiQibOjg0b6KyKp|d1eb01730479d281a2b1a77260a2380822b131f88eecb714f3516500ee83a553")
+	req.Header.Set("Cookie", pe.cookie)
 
 	client := getClient()
 
