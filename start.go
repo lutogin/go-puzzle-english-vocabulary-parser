@@ -12,7 +12,7 @@ import (
 
 func Start(cfg *config.Config, logger *logging.Logger) {
 	logger.Infoln("App is started.")
-	fmt.Print("Enter you cookie: ")
+	fmt.Print("Enter your cookie from puzzle-english: ")
 
 	cookie, err := utils.GetPrompt()
 	if err != nil {
