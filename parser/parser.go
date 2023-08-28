@@ -11,7 +11,12 @@ import (
 	"strings"
 )
 
-func Parser(cfg *config.Config, client *peclient.PeClient, logger *logging.Logger) {
+type Opts struct {
+	AddExtraExamples bool
+}
+
+//nolint:funlen
+func Parser(cfg *config.Config, client *peclient.PeClient, logger *logging.Logger, opts *Opts) {
 	file, err := os.Create("vocabulary.csv")
 	if err != nil {
 		panic(err)
@@ -19,7 +24,6 @@ func Parser(cfg *config.Config, client *peclient.PeClient, logger *logging.Logge
 	defer file.Close()
 
 	writer := csv.NewWriter(file)
-
 	hasMore := true
 	page := 0
 	processedWords := 0
@@ -51,8 +55,19 @@ func Parser(cfg *config.Config, client *peclient.PeClient, logger *logging.Logge
 			translations = append(translations, strings.TrimSpace(s.Text()))
 		})
 
+		var exampleOfUsingEn []string
+		if opts.AddExtraExamples {
+			doc.Find(cfg.Pe.SelectorSentencesEng).Each(func(i int, s *goquery.Selection) {
+				exampleOfUsingEn = append(exampleOfUsingEn, strings.TrimSpace(s.Text()))
+			})
+		}
+
 		for i, word := range words {
-			err := writer.Write([]string{word, translations[i]})
+			if opts.AddExtraExamples {
+				err = writer.Write([]string{word, translations[i], exampleOfUsingEn[i]})
+			} else {
+				err = writer.Write([]string{word, translations[i]})
+			}
 			if err != nil {
 				logger.Fatal(err)
 				panic(err)
@@ -66,5 +81,5 @@ func Parser(cfg *config.Config, client *peclient.PeClient, logger *logging.Logge
 		fmt.Printf("\rProcessed %d words...", processedWords)
 	}
 
-	logger.Infof("Were success exported %d words.", processedWords)
+	logger.Infof(fmt.Sprintf("\n %d words have been success exported."), processedWords)
 }
