@@ -3,12 +3,13 @@ package parser
 import (
 	"encoding/csv"
 	"fmt"
-	"github.com/PuerkitoBio/goquery"
 	"go-puzzle-english-vocabulary-parser/common/logging"
 	"go-puzzle-english-vocabulary-parser/config"
 	peclient "go-puzzle-english-vocabulary-parser/pe-cleint"
 	"os"
 	"strings"
+
+	"github.com/PuerkitoBio/goquery"
 )
 
 type Opts struct {
@@ -80,6 +81,7 @@ func Parser(cfg *config.Config, client *peclient.PeClient, logger *logging.Logge
 		//logger.Infof("\rProcessed %d words \n", processedWords)
 		fmt.Printf("\rProcessed %d words...", processedWords)
 	}
+	fmt.Printf("\n")
 
-	logger.Infof(fmt.Sprintf("\n %d words have been success exported."), processedWords)
+	logger.Infof(fmt.Sprintf("\n %d words have been success exported.", processedWords))
 }

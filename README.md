@@ -3,7 +3,9 @@
 Puzzle-english vocabulary parser is application writes on Golang for export vocabulary from Puzzle-english site.
 
 ## Download
-[MacOS](https://github.com/lutogin/go-puzzle-english-vocabulary-parser/raw/master/builds/mac-os/go-puzzle-english-vocabulary-parser)
+[MacOS Intel](https://github.com/lutogin/go-puzzle-english-vocabulary-parser/raw/master/builds/mac-os-intel/go-puzzle-english-vocabulary-parser)
+
+[MacOS Apple Silicon](https://github.com/lutogin/go-puzzle-english-vocabulary-parser/raw/master/builds/mac-os-apple-silicon/go-puzzle-english-vocabulary-parser)
 
 [Windows](https://github.com/lutogin/go-puzzle-english-vocabulary-parser/raw/master/builds/windows/go-puzzle-english-vocabulary-parser.exe)
 
@@ -12,9 +14,14 @@ Puzzle-english vocabulary parser is application writes on Golang for export voca
 ## Build
 For manually building just download the repo and run build command.
 
-MacOS
+MacOS (Intel)
 ```bash
-GOOS=darwin GOARCH=amd64 go build -o builds/mac-os/
+GOOS=darwin GOARCH=amd64 go build -o builds/mac-os-intel/
+```
+
+MacOS (Apple Silicon)
+```bash
+GOOS=darwin GOARCH=arm64 go build -o builds/mac-os-apple-silicon/
 ```
 
 Windows
